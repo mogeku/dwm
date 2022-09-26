@@ -1606,7 +1606,7 @@ run(void)
 void
 runAutostart(void) {
 	/* system("cd ~/.dwm; ./autostart_blocking.sh"); */
-	system("cd ~/scripts; /bin/bash ./autostart.sh &");
+	system("cd ~/script; /bin/bash ./autostart.sh &");
 }
 
 void
