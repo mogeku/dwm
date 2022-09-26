@@ -1,3 +1,5 @@
+#include <X11/XF86keysym.h>
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -6,7 +8,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font Mono:size=20" };
+static const char *fonts[]          = { "JetBrainsMono Nerd Font Mono:size=14" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font Mono:size=20";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -15,6 +17,15 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
+
+static const char col_nordfg[] = "#434C5E";
+static const char col_nordbg[] = "#D8DEE9";
+static const char col_nordborder[] = "#D8DEE9";
+
+static const char col_nordfgSel[] = "#434C5E";
+static const char col_nordbgSel[] = "#88C0D0";
+static const char col_nordborderSel[] = "#88C0D0";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -54,7 +65,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -68,13 +79,26 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+
+static const char *trayercmd[]  = { "bash", "/home/momo/script/t-toggle.sh", NULL };
+static const char *upvol[]  = { "bash", "/home/momo/script/vol-up.sh", NULL };
+static const char *downvol[]  = { "bash", "/home/momo/script/vol-down.sh", NULL };
+static const char *mutevol[]  = { "bash", "/home/momo/script/vol-toggle.sh", NULL };
+static const char *flamcmd[]  = { "flameshot", "gui", NULL };
+
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+// https://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,                            XK_F1,     spawn,          {.v = flamcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute,        spawn,          {.v = mutevol } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
  	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
