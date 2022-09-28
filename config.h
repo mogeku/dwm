@@ -84,21 +84,28 @@ static const char *trayercmd[]  = { "bash", "/home/momo/script/t-toggle.sh", NUL
 static const char *upvol[]  = { "bash", "/home/momo/script/vol-up.sh", NULL };
 static const char *downvol[]  = { "bash", "/home/momo/script/vol-down.sh", NULL };
 static const char *mutevol[]  = { "bash", "/home/momo/script/vol-toggle.sh", NULL };
+static const char *uplight[]  = { "bash", "/home/momo/script/light-up.sh", NULL };
+static const char *downlight[]  = { "bash", "/home/momo/script/light-down.sh", NULL };
+static const char *togglelight[]  = { "bash", "/home/momo/script/light-toggle.sh", NULL };
 static const char *flamcmd[]  = { "flameshot", "gui", NULL };
 
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 // https://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
+// https://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ 0,                            XK_F1,     spawn,          {.v = flamcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
-	{ 0,                            XF86XK_AudioMute,        spawn,          {.v = mutevol } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
+	{ 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute,           spawn,          {.v = mutevol } },
+	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = upvol   } },
+	{ 0,                            XF86XK_MonBrightnessUp,     spawn,          {.v = uplight } },
+	{ 0,                            XF86XK_MonBrightnessDown,   spawn,          {.v = downlight } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = togglelight } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
  	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
