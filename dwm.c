@@ -114,6 +114,7 @@ typedef struct {
 	void (*arrange)(Monitor *);
 } Layout;
 
+typedef struct Pertag Pertag;
 struct Monitor {
 	char ltsymbol[16];
 	float mfact;
@@ -298,6 +299,16 @@ static Colormap cmap;
 #include "config.h"
 
 static unsigned int scratchtag = 1 << LENGTH(tags);
+
+struct Pertag {
+  unsigned int curtag, prevtag;          /* current and previous tag */
+  int nmasters[LENGTH(tags) + 1];        /* number of windows in master area */
+  float mfacts[LENGTH(tags) + 1];        /* mfacts per tag */
+  unsigned int sellts[LENGTH(tags) + 1]; /* selected layouts */
+  const Layout
+      *ltidxs[LENGTH(tags) + 1][2]; /* matrix of tags and layouts indexes  */
+  int showbars[LENGTH(tags) + 1];   /* display bar for the current tag */
+};
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
