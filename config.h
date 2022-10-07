@@ -10,7 +10,7 @@ static const unsigned int gappih    = 10;       /* horiz inner gap between windo
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
@@ -68,17 +68,17 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "平铺",      tile },    /* first entry is default */
+	{ "口日",      tile },    /* first entry is default */
 	{ "[M]",      monocle },
 	{ "[@]",      spiral },
 	{ "[\\]",     dwindle },
 	{ "H[]",      deck },
-	{ "TTT",      bstack },
+	{ "品",      bstack },
 	{ "===",      bstackhoriz },
 	{ "HHH",      grid },
-	{ "###",      nrowgrid },
+	{ "田",      nrowgrid },
 	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
+	{ "田",      gaplessgrid },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
 	{ "浮动",      NULL },    /* no layout function means floating behavior */
@@ -137,11 +137,12 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
-	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_equal,  setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_minus,  setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_minus,  setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_equal,  setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_o,      setmfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
@@ -162,8 +163,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_w,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[10]} },
+	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[11]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[12]} },
 	{ MODKEY|ShiftMask,             XK_f,      fullscreen,     {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
