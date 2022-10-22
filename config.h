@@ -1,5 +1,26 @@
 #include <X11/XF86keysym.h>
 
+// #define DEBUG
+
+#ifdef DEBUG
+#include <stdio.h>
+#define LOG_FILE_PATH "/home/momo/dwm.log"
+FILE * gLogFilePtr = NULL;
+#endif
+
+#ifdef DEBUG
+#define LOG_DEBUG(fmt, args...)  \
+    do {\
+        if (gLogFilePtr == NULL) gLogFilePtr = fopen(LOG_FILE_PATH, "a");\
+        fprintf(gLogFilePtr, "<<[%s\t%s]\tFile:%s\t Line:%d \tFunction:%s>> ", __DATE__,__TIME__,__FILE__, __LINE__, __FUNCTION__);\
+        fprintf(gLogFilePtr, fmt, ##args);\
+        fclose(gLogFilePtr);\
+        gLogFilePtr = NULL;\
+    }while(0)
+#else
+#define LOG_DEBUG(fmt, args...)
+#endif
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */

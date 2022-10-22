@@ -1958,6 +1958,9 @@ void toggleview(const Arg *arg) {
 
 void hide(const Arg *arg) {
   Client *c = (Client *)selmon->sel;
+  if (!c || HIDDEN(c))
+    return;
+
   hidewin(c);
   focus(NULL);
   arrange(selmon);
@@ -2002,13 +2005,16 @@ void togglewin(const Arg *arg) {
 
 void restorewin(const Arg *arg) {
   int i = hiddenWinStackTop;
+  LOG_DEBUG("hiddenWinStackTop=%d\n", hiddenWinStackTop);
   while (i > -1) {
+    LOG_DEBUG("i=%d\n", i);
     if (HIDDEN(hiddenWinStack[i]) &&
         hiddenWinStack[i]->tags == selmon->tagset[selmon->seltags]) {
       showwin(hiddenWinStack[i]);
       focus(hiddenWinStack[i]);
       arrange(selmon);
       for (int j = i; j < hiddenWinStackTop; ++j) {
+        LOG_DEBUG("j=%d\n", j);
         hiddenWinStack[j] = hiddenWinStack[j + 1];
       }
       --hiddenWinStackTop;
