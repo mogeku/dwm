@@ -129,6 +129,7 @@ static const char *mutevol[]  = { "bash", "/home/momo/script/vol-toggle.sh", NUL
 static const char *uplight[]  = { "bash", "/home/momo/script/light-up.sh", NULL };
 static const char *downlight[]  = { "bash", "/home/momo/script/light-down.sh", NULL };
 static const char *togglelight[]  = { "bash", "/home/momo/script/light-toggle.sh", NULL };
+static const char *lockscreen[]  = { "bash", "/home/momo/script/lock-screen.sh", NULL };
 static const char *flamcmd[]  = { "flameshot", "gui", NULL };
 
 static const char scratchpadname[] = "scratchpad";
@@ -142,6 +143,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|Mod1Mask,              XK_t,      spawn,          {.v = trayercmd } },
+	{ MODKEY,                       XK_l,      spawn,          {.v = lockscreen } },
 	{ 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute,           spawn,          {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = upvol   } },
