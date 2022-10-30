@@ -130,7 +130,7 @@ static const char *uplight[]  = { "bash", "/home/momo/script/light-up.sh", NULL 
 static const char *downlight[]  = { "bash", "/home/momo/script/light-down.sh", NULL };
 static const char *togglelight[]  = { "bash", "/home/momo/script/light-toggle.sh", NULL };
 static const char *lockscreen[]  = { "bash", "/home/momo/script/lock-screen.sh", NULL };
-static const char *copyhistorycmd[] = {"fish", "-c", "history | dmenu -fn 'JetBrainsMono Nerd Font Mono:size=20' -l 10 | tr -d '\n' | xsel -b"};
+static const char *copyhistorycmd[] = {"bash", "-c", "awk -F ';' '{print $2}' ~/.zsh_history | dmenu -fn 'JetBrainsMono Nerd Font Mono:size=20' -l 10 | tr -d '\n' | xsel -b"};
 static const char *flamcmd[]  = { "flameshot", "gui", NULL };
 
 static const char scratchpadname[] = "scratchpad";
