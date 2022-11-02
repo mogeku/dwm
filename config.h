@@ -73,9 +73,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class                   instance                   title       tags mask     isfloating   monitor */
+	{ "Clash for Windows",     "clash for windows",       NULL,       1 << 8,       0,           -1 },
+	{ "Vmware",                "vmware",                  NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -130,6 +130,9 @@ static const char *uplight[]  = { "bash", "/home/momo/script/light-up.sh", NULL 
 static const char *downlight[]  = { "bash", "/home/momo/script/light-down.sh", NULL };
 static const char *togglelight[]  = { "bash", "/home/momo/script/light-toggle.sh", NULL };
 static const char *lockscreen[]  = { "bash", "/home/momo/script/lock-screen.sh", NULL };
+static const char *screencast[]  = { "bash", "/home/momo/script/screencast.sh", NULL };
+static const char *screencast_left[]  = { "bash", "/home/momo/script/screencast_left.sh", NULL };
+static const char *screencast_right[]  = { "bash", "/home/momo/script/screencast_right.sh", NULL };
 static const char *copyhistorycmd[] = {"bash", "-c", "awk -F ';' '{print $2}' ~/.zsh_history | dmenu -fn 'JetBrainsMono Nerd Font Mono:size=20' -l 10 | tr -d '\n' | xsel -b"};
 static const char *flamcmd[]  = { "flameshot", "gui", NULL };
 
@@ -151,6 +154,9 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = upvol   } },
 	{ 0,                            XF86XK_MonBrightnessUp,     spawn,          {.v = uplight } },
 	{ 0,                            XF86XK_MonBrightnessDown,   spawn,          {.v = downlight } },
+    { MODKEY,                       XK_F8,                      spawn,          {.v = screencast } },
+	{ MODKEY,                       XK_Left,                    spawn,          {.v = screencast_left } },
+	{ MODKEY,                       XK_Right,                   spawn,          {.v = screencast_right } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = togglelight } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
